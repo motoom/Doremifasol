@@ -239,12 +239,11 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="EV4-aS-umv"/>
                         <segue destination="41p-a8-0mh" kind="relationship" relationship="viewControllers" id="WfQ-wj-S8r"/>
                         <segue destination="eq2-SD-TdC" kind="relationship" relationship="viewControllers" id="8fW-uu-cxc"/>
-                        <segue destination="owC-61-LBw" kind="relationship" relationship="viewControllers" id="9jA-fF-deH"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i6o-Mr-f06" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="916" y="-608"/>
+            <point key="canvasLocation" x="732" y="-615"/>
         </scene>
         <!--intervals-->
         <scene sceneID="bCl-qo-Mnr">
@@ -469,27 +468,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FHu-sm-jv8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1134" y="213"/>
-        </scene>
-        <!--chords-->
-        <scene sceneID="4ny-FH-QVw">
-            <objects>
-                <viewController id="owC-61-LBw" customClass="ChordsViewController" customModule="Doremifasol" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="zvq-fa-U64"/>
-                        <viewControllerLayoutGuide type="bottom" id="HUI-gD-WEL"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="862-nE-hOg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="chords" id="fwY-Z7-VHb">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-18"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RHK-he-KnP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1569" y="213"/>
         </scene>
     </scenes>
 </document>

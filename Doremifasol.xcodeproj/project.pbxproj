@@ -14,10 +14,8 @@
 		CE7231B41EAA6BE3007AA2AF /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7231B31EAA6BE3007AA2AF /* PlayViewController.swift */; };
 		CE7231B61EAA6BF9007AA2AF /* RootnoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7231B51EAA6BF9007AA2AF /* RootnoteViewController.swift */; };
 		CE7231B81EAA6C08007AA2AF /* IntervalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7231B71EAA6C08007AA2AF /* IntervalsViewController.swift */; };
-		CE7231BA1EAA6C71007AA2AF /* ChordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7231B91EAA6C71007AA2AF /* ChordsViewController.swift */; };
 		CE7231BC1EAA6D1B007AA2AF /* MidiSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7231BB1EAA6D1B007AA2AF /* MidiSampler.swift */; };
 		CE7231BE1EAA6DA9007AA2AF /* gm.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = CE7231BD1EAA6DA9007AA2AF /* gm.sf2 */; };
-		CE7231C01EAAB9BC007AA2AF /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7231BF1EAAB9BC007AA2AF /* Speaker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,10 +28,8 @@
 		CE7231B31EAA6BE3007AA2AF /* PlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		CE7231B51EAA6BF9007AA2AF /* RootnoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootnoteViewController.swift; sourceTree = "<group>"; };
 		CE7231B71EAA6C08007AA2AF /* IntervalsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsViewController.swift; sourceTree = "<group>"; };
-		CE7231B91EAA6C71007AA2AF /* ChordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChordsViewController.swift; sourceTree = "<group>"; };
 		CE7231BB1EAA6D1B007AA2AF /* MidiSampler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MidiSampler.swift; sourceTree = "<group>"; };
 		CE7231BD1EAA6DA9007AA2AF /* gm.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = gm.sf2; sourceTree = "<group>"; };
-		CE7231BF1EAAB9BC007AA2AF /* Speaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,13 +64,11 @@
 			children = (
 				CE7231BD1EAA6DA9007AA2AF /* gm.sf2 */,
 				CE7231BB1EAA6D1B007AA2AF /* MidiSampler.swift */,
-				CE7231BF1EAAB9BC007AA2AF /* Speaker.swift */,
 				CE7231A11EAA48DE007AA2AF /* AppDelegate.swift */,
 				CE7231B31EAA6BE3007AA2AF /* PlayViewController.swift */,
 				CE7231B51EAA6BF9007AA2AF /* RootnoteViewController.swift */,
 				CE7231B71EAA6C08007AA2AF /* IntervalsViewController.swift */,
 				CE7231A51EAA48DE007AA2AF /* Main.storyboard */,
-				CE7231B91EAA6C71007AA2AF /* ChordsViewController.swift */,
 				CE7231A81EAA48DE007AA2AF /* Assets.xcassets */,
 				CE7231AA1EAA48DE007AA2AF /* LaunchScreen.storyboard */,
 				CE7231AD1EAA48DE007AA2AF /* Info.plist */,
@@ -155,10 +149,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE7231B61EAA6BF9007AA2AF /* RootnoteViewController.swift in Sources */,
-				CE7231BA1EAA6C71007AA2AF /* ChordsViewController.swift in Sources */,
 				CE7231BC1EAA6D1B007AA2AF /* MidiSampler.swift in Sources */,
 				CE7231B81EAA6C08007AA2AF /* IntervalsViewController.swift in Sources */,
-				CE7231C01EAAB9BC007AA2AF /* Speaker.swift in Sources */,
 				CE7231B41EAA6BE3007AA2AF /* PlayViewController.swift in Sources */,
 				CE7231A21EAA48DE007AA2AF /* AppDelegate.swift in Sources */,
 			);
@@ -308,6 +300,7 @@
 				CE7231B21EAA48DE007AA2AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
