@@ -10,6 +10,7 @@ class RootnoteViewController: UIViewController {
     @IBOutlet weak var directionSegment: UISegmentedControl!
     @IBOutlet weak var separatedSwitch: UISwitch!
     @IBOutlet weak var speakSwitch: UISwitch!
+    @IBOutlet weak var fixedrootSwitch: UISwitch!
 
     override func viewDidLoad() {
         switch(patch) {
@@ -34,12 +35,14 @@ class RootnoteViewController: UIViewController {
 
         separatedSwitch.setOn(separate, animated: false)
         speakSwitch.setOn(speaking, animated: false)
+        fixedrootSwitch.setOn(fixedroot, animated: false)
         }
 
 
     @IBAction func patchChanged(sender: UISegmentedControl) {
         let patches = [0, 73, 53, 32]
-        sampler?.programChange(patches[sender.selectedSegmentIndex])
+        let patch = patches[sender.selectedSegmentIndex]
+        sampler?.programChange(patch)
         }
 
 
@@ -66,5 +69,10 @@ class RootnoteViewController: UIViewController {
     @IBAction func speakingChanged(sender: UISwitch) {
         speaking = sender.on
         }
+
+    @IBAction func fixedrootChange(sender: UISwitch) {
+        fixedroot = sender.on
+        }
+
 
     }

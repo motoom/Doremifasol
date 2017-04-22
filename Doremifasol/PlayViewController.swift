@@ -56,16 +56,18 @@ class PlayViewController: UIViewController {
         speaker = AVSpeechSynthesizer()
         speaker?.delegate = self
         let currentLanguage = AVSpeechSynthesisVoice.currentLanguageCode()
+        // If the language is Dutch, prefer Ellen as voice.
+        // TODO: Also pick out a English speaking voice for any other languages than Dutch or English.
         if currentLanguage.hasPrefix("nl-") {
-            intervalName = intervalNameDutch
             for voice in AVSpeechSynthesisVoice.speechVoices() {
                 if voice.name == "Ellen" {
                     ellen = voice
                     }
                 }
+            intervalName = intervalNameDutch // ...and use the Dutch interval names.
             }
         else {
-            intervalName = intervalNameEnglish
+            intervalName = intervalNameEnglish // otherwise, use the english interval names
             }
 
         // TODO: laad settings uit UserDefaults. En de andere instelbare variabelen ook. Zie AppDelegate
@@ -87,7 +89,7 @@ class PlayViewController: UIViewController {
 
         // Choose first note (near the root)
         firstnote = rootnote
-        if rootvar {
+        if !fixedroot {
             firstnote += rand() % 12 - 6
             }
 
@@ -205,7 +207,10 @@ class PlayViewController: UIViewController {
                 }
             else {
                 // Default voice.
-                speaker?.speakUtterance(AVSpeechUtterance(string: intervalName[steps]))
+                let utterance = AVSpeechUtterance(string: intervalName[steps])
+                utterance.pitchMultiplier = randbetween(0.8, 1.2)
+                utterance.rate = randbetween(0.45, 0.55)
+                speaker?.speakUtterance(utterance)
                 }
             }
         else {
