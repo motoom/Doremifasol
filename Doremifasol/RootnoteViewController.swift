@@ -41,7 +41,7 @@ class RootnoteViewController: UIViewController {
 
     @IBAction func patchChanged(sender: UISegmentedControl) {
         let patches = [0, 73, 53, 32]
-        let patch = patches[sender.selectedSegmentIndex]
+        patch = patches[sender.selectedSegmentIndex]
         sampler?.programChange(patch)
         }
 

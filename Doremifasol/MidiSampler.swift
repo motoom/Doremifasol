@@ -1,5 +1,5 @@
 
-//  MidiSampler.swift
+//  MidiSampler.swift - version 22 apr 2017
 //
 // Derived from https://raw.githubusercontent.com/genedelisa/MusicSequenceAUGraph
 //
@@ -28,7 +28,7 @@ class MidiSampler  {
 
 
     deinit {
-        print(AUGraphStop(self.graph))
+        AUGraphStop(self.graph)
         }
 
 
@@ -90,12 +90,12 @@ class MidiSampler  {
         MusicDeviceMIDIEvent(self.sampler, 0x80, UInt32(noteNum), 0, 0)
         }
 
+
     func allOff() { // all notes off + reset all controllers
         MusicDeviceMIDIEvent(self.sampler, 0xB0, 0x7B, 0, 0)
         MusicDeviceMIDIEvent(self.sampler, 0xB0, 0x79, 0, 0)
         }
 
-// look in the MIDI event list to see if there are any cc10 (pan) messages in there. If there are just delete them and pan will default to center. For info CC10 zero is left pan, CC10 64 is center and CC127 is right pan. Also be aware that some sound libraries have their instruments panned to certain positions to make it sound as if they were part of an orchestra.
 
     func pan(position: Int) { // Pan -64..64
         let c = UInt32(position + 64)
@@ -120,10 +120,9 @@ class MidiSampler  {
         }
 
 
-
-
     static let notenamesFlat: [String] = ["C", "D♭", "D", "E♭", "E", "F", "G♭", "G", "A♭", "A", "B♭", "B", "C"]
     static let notenamesSharp: [String] = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B", "C"]
+
 
     static func prtmidinote(note: Int, preferFlat: Bool = true, withOctave: Bool = true) -> String {
         var s = ""
@@ -532,7 +531,5 @@ GM Standard Drum Map
     79 Open Cuíca
     80 Mute Triangle
     81 Open Triangle
-
-
-
 */
+
