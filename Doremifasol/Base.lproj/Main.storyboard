@@ -50,7 +50,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="zpC-zy-83b" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="6YM-It-aW2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wp0-ti-lBn" secondAttribute="trailing" id="9cZ-rA-VDD"/>
@@ -91,7 +91,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NyK-h1-ehu">
-                                <rect key="frame" x="16" y="49" width="288" height="29"/>
+                                <rect key="frame" x="16" y="69" width="288" height="29"/>
                                 <segments>
                                     <segment title="Piano"/>
                                     <segment title="Flute"/>
@@ -103,7 +103,7 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ods-BZ-kB4">
-                                <rect key="frame" x="16" y="136" width="288" height="29"/>
+                                <rect key="frame" x="16" y="156" width="288" height="29"/>
                                 <segments>
                                     <segment title="Low"/>
                                     <segment title="Middle"/>
@@ -114,7 +114,7 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6f6-ZU-bCQ">
-                                <rect key="frame" x="16" y="223" width="288" height="29"/>
+                                <rect key="frame" x="16" y="243" width="288" height="29"/>
                                 <segments>
                                     <segment title="Descending"/>
                                     <segment title="Both"/>
@@ -125,61 +125,61 @@
                                 </connections>
                             </segmentedControl>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IjG-eU-BG1">
-                                <rect key="frame" x="16" y="281" width="51" height="31"/>
+                                <rect key="frame" x="16" y="301" width="51" height="31"/>
                                 <connections>
                                     <action selector="separateChanged:" destination="41p-a8-0mh" eventType="valueChanged" id="bBy-lR-jdH"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play notes separately" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHe-NA-zgs">
-                                <rect key="frame" x="73" y="286" width="163" height="21"/>
+                                <rect key="frame" x="73" y="306" width="163" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instrument" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ca-TI-P5l">
-                                <rect key="frame" x="16" y="20" width="288" height="21"/>
+                                <rect key="frame" x="16" y="40" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Register" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3MI-En-vzu">
-                                <rect key="frame" x="16" y="107" width="288" height="21"/>
+                                <rect key="frame" x="16" y="127" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Direction" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izx-Sv-I1s">
-                                <rect key="frame" x="16" y="194" width="288" height="21"/>
+                                <rect key="frame" x="16" y="214" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NkP-KN-Eof">
-                                <rect key="frame" x="16" y="332" width="51" height="31"/>
+                                <rect key="frame" x="16" y="352" width="51" height="31"/>
                                 <connections>
                                     <action selector="speakingChanged:" destination="41p-a8-0mh" eventType="valueChanged" id="fwr-m0-Oju"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speak intervals" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3S-L6-PvS">
-                                <rect key="frame" x="73" y="337" width="117" height="21"/>
+                                <rect key="frame" x="73" y="357" width="117" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LQQ-Mx-Iss">
-                                <rect key="frame" x="16" y="383" width="51" height="31"/>
+                                <rect key="frame" x="16" y="403" width="51" height="31"/>
                                 <connections>
                                     <action selector="fixedrootChange:" destination="41p-a8-0mh" eventType="valueChanged" id="TLR-pe-6ox"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fixed root note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPR-su-b3M">
-                                <rect key="frame" x="73" y="388" width="115" height="21"/>
+                                <rect key="frame" x="73" y="408" width="115" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="6f6-ZU-bCQ" firstAttribute="trailing" secondItem="Qdc-dQ-peJ" secondAttribute="trailingMargin" id="0Vv-OB-5Ox"/>
                             <constraint firstItem="LQQ-Mx-Iss" firstAttribute="leading" secondItem="Qdc-dQ-peJ" secondAttribute="leadingMargin" id="11d-vl-Mge"/>
@@ -193,7 +193,7 @@
                             <constraint firstItem="3MI-En-vzu" firstAttribute="leading" secondItem="Qdc-dQ-peJ" secondAttribute="leadingMargin" id="O9B-2L-xy3"/>
                             <constraint firstItem="Izx-Sv-I1s" firstAttribute="top" secondItem="ods-BZ-kB4" secondAttribute="bottom" constant="30" id="QZe-in-aNx"/>
                             <constraint firstItem="6f6-ZU-bCQ" firstAttribute="leading" secondItem="Qdc-dQ-peJ" secondAttribute="leadingMargin" id="TN8-h1-N7a"/>
-                            <constraint firstItem="4Ca-TI-P5l" firstAttribute="top" secondItem="yoF-Iq-ZyN" secondAttribute="bottom" id="W56-sZ-rOI"/>
+                            <constraint firstItem="4Ca-TI-P5l" firstAttribute="top" secondItem="yoF-Iq-ZyN" secondAttribute="bottom" constant="20" id="W56-sZ-rOI"/>
                             <constraint firstItem="JPR-su-b3M" firstAttribute="centerY" secondItem="LQQ-Mx-Iss" secondAttribute="centerY" id="WIT-ST-XNE"/>
                             <constraint firstItem="MHe-NA-zgs" firstAttribute="leading" secondItem="IjG-eU-BG1" secondAttribute="trailing" constant="8" id="YcR-CU-d9L"/>
                             <constraint firstItem="NkP-KN-Eof" firstAttribute="leading" secondItem="Qdc-dQ-peJ" secondAttribute="leadingMargin" id="aLB-nW-euG"/>
@@ -434,7 +434,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ucd-CR-KGD" firstAttribute="top" secondItem="8GK-1M-5Su" secondAttribute="bottom" constant="8" id="2jY-Qq-Ith"/>
                             <constraint firstItem="jZo-Gk-4vq" firstAttribute="top" secondItem="o39-Tp-kHm" secondAttribute="bottom" constant="8" id="59K-hG-4AL"/>
