@@ -80,6 +80,30 @@ class PlayViewController: UIViewController {
 
         }
 
+    @IBOutlet weak var pauseButton: UIButton!
+
+    var paused = false
+
+    @IBAction func pauseClicked(sender: UIButton) {
+        cleartimer()
+        sampler?.allOff()
+        if paused {
+            paused = false
+            pauseButton.setTitle("pause", forState: .Normal)
+            firstNoteLabel.text = ""
+            secondNoteLabel.text = ""
+            intervalNameLabel.text = "starting..."
+            timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "chooseNotes", userInfo: nil, repeats: false)
+            }
+        else {
+            paused = true
+            pauseButton.setTitle("start", forState: .Normal)
+            firstNoteLabel.text = ""
+            secondNoteLabel.text = ""
+            intervalNameLabel.text = "paused"
+            }
+        }
+
 
     func chooseNotes() {
         cleartimer()

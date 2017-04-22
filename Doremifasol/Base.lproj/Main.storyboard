@@ -42,8 +42,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpC-zy-83b">
-                                <rect key="frame" x="16" y="481" width="288" height="30"/>
+                                <rect key="frame" x="16" y="429" width="288" height="50"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="32"/>
                                 <state key="normal" title="pause"/>
+                                <connections>
+                                    <action selector="pauseClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5j3-cI-yfA"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -54,7 +58,7 @@
                             <constraint firstItem="yu6-yM-fTB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Vg2-vW-qZZ"/>
                             <constraint firstItem="wp0-ti-lBn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="X3M-g6-NyF"/>
                             <constraint firstItem="zpC-zy-83b" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="cuB-MB-lsh"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zpC-zy-83b" secondAttribute="bottom" constant="8" id="np3-hT-O0R"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zpC-zy-83b" secondAttribute="bottom" constant="40" id="np3-hT-O0R"/>
                             <constraint firstAttribute="trailingMargin" secondItem="yu6-yM-fTB" secondAttribute="trailing" id="she-3t-7uf"/>
                             <constraint firstItem="yu6-yM-fTB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="vds-sf-1h9"/>
                         </constraints>
@@ -66,6 +70,7 @@
                     <connections>
                         <outlet property="firstNoteLabel" destination="dDe-hy-Y2M" id="lzj-Ez-gfh"/>
                         <outlet property="intervalNameLabel" destination="wp0-ti-lBn" id="7d6-oo-dYx"/>
+                        <outlet property="pauseButton" destination="zpC-zy-83b" id="7NR-mP-Ux3"/>
                         <outlet property="secondNoteLabel" destination="GYW-dg-5bl" id="noV-6V-Oux"/>
                     </connections>
                 </viewController>
