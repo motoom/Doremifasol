@@ -1,0 +1,87 @@
+Solfege app: Doremifasol
+
+Features
+
+Taal Engels/Nederlands.
+Intervalaankondiging met speech synthesis.
+Vinkjes voor de volgende intervallen: 1, m2, 2, m3, 3, 4, b5, 5, #5, 6, 7, maj7, 8, m9, 9, m10, 10, 11, m12, 12, m13, 13, 14, #14.
+Delay tussen noten instelbaar.
+Denktijd instelbaar (tijd tussen spelen van noten en tonen van het gespeelde interval).
+Root noot fixed (instelbaar), of variabel (random).
+In geval van fixed root noot: exacte toonhoogte.
+In geval van variable root noot: ondergrens en bovengrens toonhoogte. (treble/middle/bass?)
+Intervallen omhoog, of omhoog en omlaag.
+Noten apart spelen of als samenklank.
+Raden met multiple-choice mogelijkheid ipv. aankondigen interval.
+Chase-mode wel of niet.
+Drieklank akkoorden: TODO
+Vierklank akkoorden: TODO
+
+Foto's van keyboard en bas als achtergrond
+
+Tabbladen:
+
+- Game (toont noten tijdens spelen, intervalnaam tijdens aankondigen)
+- Noot settings (fixed, variabel, instrument, bas/middle/treble, omhoog/omlaag, delays, enkel/samenklank)
+- Intervallen settings (switches voor welke intervallen mogen voorkomen)
+- Akkoorden settings (switches met welke akkoorden mogen voorkomen)
+
+Icon: twee muzieknoten, punt-gespiegeld, op verkeersbordblauwe vierkante achtergrond.
+
+
+Zie ook https://nl.wikipedia.org/wiki/Interval_(muziek)#Naamgeving
+
+char *dutchname[]={ "prime","kleine secunde","secunde","kleine terts",
+					"grote terts","kwart","verminderde kwint","kwint","overmatige kwint",
+					"sext","klein septiem","groot septiem","oktaaf",
+					"m9","9","m10",
+					"10","11","m12","12","m13",
+					"13","14","#14",""};
+
+char *englishname[]={"prime","minor second","second","minor third",
+					 "third","fourth","augmented fourth","fifth","augmented fifth",
+					 "sixth","minor seventh","major seventh","octave",
+					 "m9","9","m10",
+					 "10","11","m12","12","m13",
+					 "13","14","#14",""};
+
+
+
+struct _akk const akkdata[]={
+{"grote drieklank","major triad",3,{0,4,7}},
+{"kleine drieklank","minor triad",3,{0,3,7}},
+{"overmatige drieklank","augmented major triad",3,{0,5,7}},
+{"dominant septiem","dominant seventh",4,{0,4,7,10}},
+{"diminished","diminished",4,{0,3,6,9}},
+{"mineur septiem mol vijf","minor seventh flat five",4,{0,3,6,10}},
+{"majeur groot septiem","major seventh",4,{0,4,7,11}},
+{"","",0,{0}}
+};
+
+
+	wsprintf(s,"%d",rootnote); WriteProfileString("Solfege","Rootnote",s);
+	wsprintf(s,"%d",notelowest); WriteProfileString("Solfege","Notelowest",s);
+	wsprintf(s,"%d",notehighest); WriteProfileString("Solfege","Notehighest",s);
+	wsprintf(s,"%d",rootvar); WriteProfileString("Solfege","Rootvar",s);
+	wsprintf(s,"%d",reg); WriteProfileString("Solfege","Reg",s);
+	wsprintf(s,"%d",voice); WriteProfileString("Solfege","Voice",s);
+	wsprintf(s,"%d",lang); WriteProfileString("Solfege","Lang",s);
+	wsprintf(s,"%d",descending); WriteProfileString("Solfege","Descending",s);
+	wsprintf(s,"%d",timethink); WriteProfileString("Solfege","Timethink",s);
+	wsprintf(s,"%d",timebetween); WriteProfileString("Solfege","Timebetween",s);
+	wsprintf(s,"%d",actpatch); WriteProfileString("Solfege","Actpatch",s);
+
+
+
+
+Productbeschrijving
+Met de Klankenkraker leer je luisteren naar intervallen en samenklanken. Hoe gemakkelijker je je oor kunt sturen, hoe meer je in een muziekstuk gaat horen. Of het nu door een symfonieorkest of door een popband gespeeld wordt. Je gaat er actief door luisteren.
+
+Op deze cd-rom vind je een heleboel spellen. De helft van deze spellen gaat over de intervallen uit het octaaf. De andere helft behandelt de drieklanken majeur, mineur, verminderd en overmatig met hun opmerkingen.
+
+Kenmerken:
+- Voor beginners zijn er spellen waarbij alleen met klank gewerkt wordt. Je oren worden geoefend in het herkennen van klanken en het onderscheiden van de tonen waaruit deze klanken zijn samengesteld.
+- Gevorderden kunnen de naam of het notenbeeld bij de opgegeven klank zoeken. Als je een harmonie fanfarediploma wilt halen, kun je hiermee oefenen.
+- Professionals stellen zelf een klank samen bij een naam of notenbeeld. Het benoemen van intervallen en drieklanken is een voorwaarde voor toelating tot het conservatorium.
+
+
