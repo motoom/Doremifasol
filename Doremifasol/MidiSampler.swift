@@ -66,16 +66,21 @@ class MidiSampler  {
         AUGraphConnectNodeInput(self.graph, samplerNode, samplerOutputElement, ioNode, ioUnitOutputElement)
         }
     
-    
+
+    func graphRunning() -> Bool {
+        var isRunning = DarwinBoolean(false)
+        AUGraphIsRunning(self.graph, &isRunning)
+        return Bool(isRunning)
+        }
+
+
     func graphStart() {
         var outIsInitialized: DarwinBoolean = false
         AUGraphIsInitialized(self.graph, &outIsInitialized)
         if outIsInitialized == false {
             AUGraphInitialize(self.graph)
             }
-        var isRunning = DarwinBoolean(false)
-        AUGraphIsRunning(self.graph, &isRunning)
-        if isRunning == false {
+        if graphRunning() == false {
             AUGraphStart(self.graph)
             }
         }

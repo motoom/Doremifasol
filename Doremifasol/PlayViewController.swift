@@ -1,11 +1,19 @@
 //  PlayViewController.swift // TODO: Pause/Start button
 
+// IDEE: Noten ook op een notebalk laten zien. Sleutel (G/F) kiesbaar.
+// programma icon
+// engels vertalen
+// icoontjes voor de tabcontroller
+// foto's achter de views
+// hoe iets op de appstore
+
 import UIKit
 import AVFoundation
 
 class PlayViewController: UIViewController {
 
     var timer: NSTimer?
+    var paused = false
     var speaker: AVSpeechSynthesizer?
     var ellen: AVSpeechSynthesisVoice? = nil
 
@@ -17,6 +25,7 @@ class PlayViewController: UIViewController {
     @IBOutlet weak var firstNoteLabel: UILabel!
     @IBOutlet weak var secondNoteLabel: UILabel!
     @IBOutlet weak var intervalNameLabel: UILabel!
+    @IBOutlet weak var pauseButton: UIButton!
 
 
 
@@ -32,15 +41,18 @@ class PlayViewController: UIViewController {
 
     var intervalName = [String]()
 
+
     func randyesno() -> Bool {
         return (Int(rand()) & 1) == 1
         }
+
 
     func randbetween(lo: Float, _ hi: Float) -> Float {
         let range = hi - lo
         let v = Float(rand()) / Float(RAND_MAX) // 0...1
         return lo + v * range
         }
+
 
     func cleartimer() {
         if let tim = timer {
@@ -49,8 +61,14 @@ class PlayViewController: UIViewController {
             }
         }
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // So that the AppDelegate can pause us when a phone call occurs, or the user switches to another app.
+        let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+        ad.playViewController = self
+
         sampler = MidiSampler(patch)
 
         speaker = AVSpeechSynthesizer()
@@ -80,27 +98,50 @@ class PlayViewController: UIViewController {
 
         }
 
-    @IBOutlet weak var pauseButton: UIButton!
 
-    var paused = false
-
-    @IBAction func pauseClicked(sender: UIButton) {
+    // Initiate a pause.
+    func pause() {
+        if paused {
+            return
+            }
         cleartimer()
         sampler?.allOff()
+        sampler = nil
+        paused = true
+        // pauseButton.setTitle("start", forState: .Normal)
+        pauseButton.setImage(UIImage(named: "button-play"), forState: .Normal)
+        firstNoteLabel.text = ""
+        secondNoteLabel.text = ""
+        intervalNameLabel.text = "paused"
+        view.setNeedsDisplay()
+        }
+
+
+    // End the pause; go back to playing state.
+    func unpause() {
+        if !paused {
+            return
+            }
+        cleartimer()
+        sampler = MidiSampler(patch)
+        sampler?.allOff()
+        paused = false
+        // pauseButton.setTitle("pause", forState: .Normal)
+        pauseButton.setImage(UIImage(named: "button-pause"), forState: .Normal)
+        firstNoteLabel.text = ""
+        secondNoteLabel.text = ""
+        intervalNameLabel.text = "starting..."
+        view.setNeedsDisplay()
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "chooseNotes", userInfo: nil, repeats: false)
+        }
+
+
+    @IBAction func pauseClicked(sender: UIButton) {
         if paused {
-            paused = false
-            pauseButton.setTitle("pause", forState: .Normal)
-            firstNoteLabel.text = ""
-            secondNoteLabel.text = ""
-            intervalNameLabel.text = "starting..."
-            timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "chooseNotes", userInfo: nil, repeats: false)
+            unpause()
             }
         else {
-            paused = true
-            pauseButton.setTitle("start", forState: .Normal)
-            firstNoteLabel.text = ""
-            secondNoteLabel.text = ""
-            intervalNameLabel.text = "paused"
+            pause()
             }
         }
 
@@ -229,7 +270,7 @@ class PlayViewController: UIViewController {
                 utterance.rate = randbetween(0.45, 0.55)
                 speaker?.speakUtterance(utterance)
                 }
-            else {
+            else { // TODO: English
                 // Default voice.
                 let utterance = AVSpeechUtterance(string: intervalName[steps])
                 utterance.pitchMultiplier = randbetween(0.8, 1.2)
@@ -248,7 +289,9 @@ class PlayViewController: UIViewController {
 extension PlayViewController: AVSpeechSynthesizerDelegate {
     // Called when the speech synthesizer is done speaking.
     func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didFinishSpeechUtterance utterance: AVSpeechUtterance) {
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "chooseNotes", userInfo: nil, repeats: false)
+        if !paused {
+            timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "chooseNotes", userInfo: nil, repeats: false)
+            }
         }
     }
 

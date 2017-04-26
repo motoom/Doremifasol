@@ -10,12 +10,12 @@
 		CE7231A21EAA48DE007AA2AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7231A11EAA48DE007AA2AF /* AppDelegate.swift */; };
 		CE7231A71EAA48DE007AA2AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7231A51EAA48DE007AA2AF /* Main.storyboard */; };
 		CE7231A91EAA48DE007AA2AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE7231A81EAA48DE007AA2AF /* Assets.xcassets */; };
-		CE7231AC1EAA48DE007AA2AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7231AA1EAA48DE007AA2AF /* LaunchScreen.storyboard */; };
 		CE7231B41EAA6BE3007AA2AF /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7231B31EAA6BE3007AA2AF /* PlayViewController.swift */; };
 		CE7231B61EAA6BF9007AA2AF /* RootnoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7231B51EAA6BF9007AA2AF /* RootnoteViewController.swift */; };
 		CE7231B81EAA6C08007AA2AF /* IntervalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7231B71EAA6C08007AA2AF /* IntervalsViewController.swift */; };
 		CE7231BC1EAA6D1B007AA2AF /* MidiSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7231BB1EAA6D1B007AA2AF /* MidiSampler.swift */; };
 		CE7231BE1EAA6DA9007AA2AF /* gm.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = CE7231BD1EAA6DA9007AA2AF /* gm.sf2 */; };
+		CEEC45FC1EB1460D00A3B94F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEEC45FB1EB1460D00A3B94F /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,13 +23,13 @@
 		CE7231A11EAA48DE007AA2AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE7231A61EAA48DE007AA2AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE7231A81EAA48DE007AA2AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CE7231AB1EAA48DE007AA2AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE7231AD1EAA48DE007AA2AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE7231B31EAA6BE3007AA2AF /* PlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		CE7231B51EAA6BF9007AA2AF /* RootnoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootnoteViewController.swift; sourceTree = "<group>"; };
 		CE7231B71EAA6C08007AA2AF /* IntervalsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalsViewController.swift; sourceTree = "<group>"; };
 		CE7231BB1EAA6D1B007AA2AF /* MidiSampler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MidiSampler.swift; sourceTree = "<group>"; };
 		CE7231BD1EAA6DA9007AA2AF /* gm.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = gm.sf2; sourceTree = "<group>"; };
+		CEEC45FB1EB1460D00A3B94F /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,8 +70,8 @@
 				CE7231B71EAA6C08007AA2AF /* IntervalsViewController.swift */,
 				CE7231A51EAA48DE007AA2AF /* Main.storyboard */,
 				CE7231A81EAA48DE007AA2AF /* Assets.xcassets */,
-				CE7231AA1EAA48DE007AA2AF /* LaunchScreen.storyboard */,
 				CE7231AD1EAA48DE007AA2AF /* Info.plist */,
+				CEEC45FB1EB1460D00A3B94F /* Launch Screen.storyboard */,
 			);
 			path = Doremifasol;
 			sourceTree = "<group>";
@@ -134,9 +134,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE7231AC1EAA48DE007AA2AF /* LaunchScreen.storyboard in Resources */,
 				CE7231A91EAA48DE007AA2AF /* Assets.xcassets in Resources */,
 				CE7231A71EAA48DE007AA2AF /* Main.storyboard in Resources */,
+				CEEC45FC1EB1460D00A3B94F /* Launch Screen.storyboard in Resources */,
 				CE7231BE1EAA6DA9007AA2AF /* gm.sf2 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,14 +165,6 @@
 				CE7231A61EAA48DE007AA2AF /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		CE7231AA1EAA48DE007AA2AF /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE7231AB1EAA48DE007AA2AF /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
