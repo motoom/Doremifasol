@@ -43,13 +43,13 @@ class PlayViewController: UIViewController {
 
 
     func randyesno() -> Bool {
-        return (Int(rand()) & 1) == 1
+        return arc4random_uniform(2) == 1
         }
 
 
     func randbetween(lo: Float, _ hi: Float) -> Float {
         let range = hi - lo
-        let v = Float(rand()) / Float(RAND_MAX) // 0...1
+        let v = Float(arc4random_uniform(UInt32.max)) / Float(UInt32.max) // 0...1
         return lo + v * range
         }
 
@@ -155,7 +155,7 @@ class PlayViewController: UIViewController {
         // Choose first note (near the root)
         firstnote = rootnote
         if !fixedroot {
-            firstnote += rand() % 12 - 6
+            firstnote += Int(arc4random_uniform(12)) - 6
             }
 
         // Adjust for lower or higher register (bass, treble option)
@@ -168,7 +168,7 @@ class PlayViewController: UIViewController {
 
         // Second note
         if intervals.count > 0 {
-            steps = intervals[Int(rand()) % intervals.count]
+            steps = intervals[Int(arc4random()) % intervals.count]
             }
 
         if descending && ascending { // Second note could be lower or higher than first note
