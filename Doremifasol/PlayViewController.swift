@@ -15,7 +15,8 @@ class PlayViewController: UIViewController {
     var timer: NSTimer?
     var paused = false
     var speaker: AVSpeechSynthesizer?
-    var ellen: AVSpeechSynthesisVoice? = nil
+    var dutchVoice: AVSpeechSynthesisVoice? = nil
+    var englishVoice: AVSpeechSynthesisVoice? = nil
 
     var firstnote = 0
     var secondnote = 0
@@ -75,27 +76,30 @@ class PlayViewController: UIViewController {
         speaker?.delegate = self
         let currentLanguage = AVSpeechSynthesisVoice.currentLanguageCode()
         // If the language is Dutch, prefer Ellen as voice.
-        // TODO: Also pick out a English speaking voice for any other languages than Dutch or English.
         if currentLanguage.hasPrefix("nl-") {
             for voice in AVSpeechSynthesisVoice.speechVoices() {
                 if voice.name == "Ellen" {
-                    ellen = voice
+                    dutchVoice = voice
+                    break
                     }
                 }
             intervalName = intervalNameDutch // ...and use the Dutch interval names.
             }
+        // If the language is not Dutch, use English voice and interval names
         else {
-            intervalName = intervalNameEnglish // otherwise, use the english interval names
+            for voice in AVSpeechSynthesisVoice.speechVoices() {
+                if voice.name == "Samantha" {
+                    englishVoice = voice
+                    break
+                    }
+                }
+            intervalName = intervalNameEnglish
             }
-
-        // TODO: laad settings uit UserDefaults. En de andere instelbare variabelen ook. Zie AppDelegate
 
         firstNoteLabel.text = ""
         secondNoteLabel.text = ""
         intervalNameLabel.text = ""
-
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "chooseNotes", userInfo: nil, repeats: false)
-
         }
 
 
@@ -108,7 +112,6 @@ class PlayViewController: UIViewController {
         sampler?.allOff()
         sampler = nil
         paused = true
-        // pauseButton.setTitle("start", forState: .Normal)
         pauseButton.setImage(UIImage(named: "button-play"), forState: .Normal)
         firstNoteLabel.text = ""
         secondNoteLabel.text = ""
@@ -126,7 +129,6 @@ class PlayViewController: UIViewController {
         sampler = MidiSampler(patch)
         sampler?.allOff()
         paused = false
-        // pauseButton.setTitle("pause", forState: .Normal)
         pauseButton.setImage(UIImage(named: "button-pause"), forState: .Normal)
         firstNoteLabel.text = ""
         secondNoteLabel.text = ""
@@ -186,7 +188,7 @@ class PlayViewController: UIViewController {
             secondnote = firstnote + steps
             }
 
-        // Slide both, so that both notes are higher than midi note 28 (==E2, lowest string on 4-stringed bass guitar). Low B string would be 23.
+        // Slide both, so that both notes are higher than midi note 28 (==E2, 40Hz, lowest string on 4-stringed bass guitar). Low B string would be 23 (30Hz).
         while firstnote < 28 || secondnote < 28 {
             firstnote += 1
             secondnote += 1
@@ -195,7 +197,6 @@ class PlayViewController: UIViewController {
         // Whether we use flats or sharps for these two notes
         preferflat = randyesno()
 
-        // TODO: Make function for statement below:
         if separate {
             timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "playFirstNote", userInfo: nil, repeats: false)
             }
@@ -222,10 +223,8 @@ class PlayViewController: UIViewController {
 
     func playSecondNote() {
         cleartimer()
-
         sampler?.noteOff(firstnote)
         sampler?.noteOn(secondnote)
-
         if secondnote >= firstnote {
             secondNoteLabel.text = MidiSampler.prtmidinote(secondnote, preferFlat: preferflat, withOctave: false)
             }
@@ -238,7 +237,6 @@ class PlayViewController: UIViewController {
 
     func playBothNotes() {
         cleartimer()
-
         sampler?.noteOn(firstnote)
         sampler?.noteOn(secondnote)
         if secondnote >= firstnote {
@@ -249,40 +247,39 @@ class PlayViewController: UIViewController {
             firstNoteLabel.text = MidiSampler.prtmidinote(secondnote, preferFlat: preferflat, withOctave: false)
             secondNoteLabel.text = MidiSampler.prtmidinote(firstnote, preferFlat: preferflat, withOctave: false)
             }
-
         timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "showSolution", userInfo: nil, repeats: false)
         }
 
 
     func showSolution() {
         cleartimer()
-
         sampler?.noteOff(firstnote)
         sampler?.noteOff(secondnote)
         intervalNameLabel.text = intervalName[steps]
-
         if speaking {
-            if let voice = ellen {
-                // Ellen for Dutch.
+            if let voice = dutchVoice {
                 let utterance = AVSpeechUtterance(string: intervalName[steps])
                 utterance.voice = voice
                 utterance.pitchMultiplier = randbetween(0.8, 1.2)
                 utterance.rate = randbetween(0.45, 0.55)
                 speaker?.speakUtterance(utterance)
                 }
-            else { // TODO: English
-                // Default voice.
+            else if let voice = englishVoice {
                 let utterance = AVSpeechUtterance(string: intervalName[steps])
+                utterance.voice = voice
                 utterance.pitchMultiplier = randbetween(0.8, 1.2)
                 utterance.rate = randbetween(0.45, 0.55)
                 speaker?.speakUtterance(utterance)
+                }
+            else {
+                // No usable voice.
+                timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "chooseNotes", userInfo: nil, repeats: false)
                 }
             }
         else {
             timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "chooseNotes", userInfo: nil, repeats: false)
             }
         }
-
     }
 
 
@@ -294,4 +291,3 @@ extension PlayViewController: AVSpeechSynthesizerDelegate {
             }
         }
     }
-
