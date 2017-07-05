@@ -12,8 +12,8 @@ import AudioToolbox
 
 class MidiSampler  {
 
-    var graph: AUGraph
-    var sampler: AudioUnit
+    var graph: AUGraph?
+    var sampler: AudioUnit?
 
 
     init(_ patch: Int = 0, percussive: Bool = false) {
@@ -26,7 +26,7 @@ class MidiSampler  {
 
 
     deinit {
-        AUGraphStop(self.graph)
+        AUGraphStop(self.graph!)
         }
 
 
@@ -40,7 +40,7 @@ class MidiSampler  {
             componentManufacturer: OSType(kAudioUnitManufacturer_Apple),
             componentFlags: 0,
             componentFlagsMask: 0)
-        AUGraphAddNode(self.graph, &scd, &samplerNode)
+        AUGraphAddNode(self.graph!, &scd, &samplerNode)
 
         var ioNode = AUNode()
         var ioUnitDescription = AudioComponentDescription(
@@ -49,77 +49,77 @@ class MidiSampler  {
             componentManufacturer: OSType(kAudioUnitManufacturer_Apple),
             componentFlags: 0,
             componentFlagsMask: 0)
-        AUGraphAddNode(self.graph, &ioUnitDescription, &ioNode)
+        AUGraphAddNode(self.graph!, &ioUnitDescription, &ioNode)
 
-        AUGraphOpen(self.graph)
+        AUGraphOpen(self.graph!)
 
-        AUGraphNodeInfo(self.graph, samplerNode, nil, &self.sampler)
+        AUGraphNodeInfo(self.graph!, samplerNode, nil, &self.sampler)
 
-        var ioUnit: AudioUnit = nil
-        AUGraphNodeInfo(self.graph, ioNode, nil, &ioUnit)
+        var ioUnit: AudioUnit? = nil
+        AUGraphNodeInfo(self.graph!, ioNode, nil, &ioUnit)
 
         let ioUnitOutputElement = AudioUnitElement(0)
         let samplerOutputElement = AudioUnitElement(0)
 
-        AUGraphConnectNodeInput(self.graph, samplerNode, samplerOutputElement, ioNode, ioUnitOutputElement)
+        AUGraphConnectNodeInput(self.graph!, samplerNode, samplerOutputElement, ioNode, ioUnitOutputElement)
         }
     
 
     func graphRunning() -> Bool {
         var isRunning = DarwinBoolean(false)
-        AUGraphIsRunning(self.graph, &isRunning)
-        return Bool(isRunning)
+        AUGraphIsRunning(self.graph!, &isRunning)
+        return isRunning.boolValue
         }
 
 
     func graphStart() {
         var outIsInitialized: DarwinBoolean = false
-        AUGraphIsInitialized(self.graph, &outIsInitialized)
+        AUGraphIsInitialized(self.graph!, &outIsInitialized)
         if outIsInitialized == false {
-            AUGraphInitialize(self.graph)
+            AUGraphInitialize(self.graph!)
             }
         if graphRunning() == false {
-            AUGraphStart(self.graph)
+            AUGraphStart(self.graph!)
             }
         }
 
 
-    func noteOn(noteNum: Int, _ velocity: Int = 120)    {
-        MusicDeviceMIDIEvent(self.sampler, 0x90, UInt32(noteNum), UInt32(velocity), 0)
+    func noteOn(_ noteNum: Int, _ velocity: Int = 120)    {
+        MusicDeviceMIDIEvent(self.sampler!, 0x90, UInt32(noteNum), UInt32(velocity), 0)
         }
 
 
-    func noteOff(noteNum: Int) {
-        MusicDeviceMIDIEvent(self.sampler, 0x80, UInt32(noteNum), 0, 0)
+    func noteOff(_ noteNum: Int) {
+        MusicDeviceMIDIEvent(self.sampler!, 0x80, UInt32(noteNum), 0, 0)
         }
 
 
     func allOff() { // all notes off + reset all controllers
-        MusicDeviceMIDIEvent(self.sampler, 0xB0, 0x7B, 0, 0)
-        MusicDeviceMIDIEvent(self.sampler, 0xB0, 0x79, 0, 0)
+        MusicDeviceMIDIEvent(self.sampler!, 0xB0, 0x7B, 0, 0)
+        MusicDeviceMIDIEvent(self.sampler!, 0xB0, 0x79, 0, 0)
         }
 
 
-    func pan(position: Int) { // Pan -64..64
+    func pan(_ position: Int) { // Pan -64..64
         let c = UInt32(position + 64)
-        MusicDeviceMIDIEvent(self.sampler, 0xB0, 10, c, 0)
+        MusicDeviceMIDIEvent(self.sampler!, 0xB0, 10, c, 0)
         }
 
 
-    func programChange(patch: Int = 0, _ percussive: Bool = false)  {
-        guard let bankURL = NSBundle.mainBundle().URLForResource("gm", withExtension: "sf2") else {
+    func programChange(_ patch: Int = 0, _ percussive: Bool = false)  {
+        guard let bankURL = Bundle.main.url(forResource: "gm", withExtension: "sf2") else {
             fatalError("\"gm.sf2\" file not found.")
             }
-        var instdata = AUSamplerInstrumentData(fileURL: Unmanaged.passUnretained(bankURL),
+        var instdata = AUSamplerInstrumentData(fileURL: Unmanaged.passUnretained(bankURL as CFURL),
                                                instrumentType: UInt8(kInstrumentType_SF2Preset),
                                                bankMSB: percussive ? UInt8(kAUSampler_DefaultPercussionBankMSB) : UInt8(kAUSampler_DefaultMelodicBankMSB),
                                                bankLSB: UInt8(kAUSampler_DefaultBankLSB),
                                                presetID: UInt8(patch))
         AudioUnitSetProperty(
-            self.sampler,
+            self.sampler!,
             AudioUnitPropertyID(kAUSamplerProperty_LoadInstrument),
             AudioUnitScope(kAudioUnitScope_Global),
-            0, &instdata, UInt32(sizeof(AUSamplerInstrumentData)))
+            0, &instdata, UInt32(MemoryLayout<AUSamplerInstrumentData>.size))
         }
 
 
@@ -127,7 +127,7 @@ class MidiSampler  {
     static let notenamesSharp: [String] = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B", "C"]
 
 
-    static func prtmidinote(note: Int, preferFlat: Bool = true, withOctave: Bool = true) -> String {
+    static func prtmidinote(_ note: Int, preferFlat: Bool = true, withOctave: Bool = true) -> String {
         var s = ""
         if preferFlat {
             s = self.notenamesFlat[note % 12]

@@ -39,19 +39,19 @@ class RootnoteViewController: UIViewController {
         }
 
 
-    @IBAction func patchChanged(sender: UISegmentedControl) {
+    @IBAction func patchChanged(_ sender: UISegmentedControl) {
         let patches = [0, 73, 53, 32]
         patch = patches[sender.selectedSegmentIndex]
         sampler?.programChange(patch)
         }
 
 
-    @IBAction func registerChanged(sender: UISegmentedControl) {
+    @IBAction func registerChanged(_ sender: UISegmentedControl) {
         register = sender.selectedSegmentIndex
         }
 
 
-    @IBAction func directionChanged(sender: UISegmentedControl) {
+    @IBAction func directionChanged(_ sender: UISegmentedControl) {
         switch(sender.selectedSegmentIndex) {
             case 0: descending = true; ascending = false
             case 1: descending = true; ascending = true
@@ -61,17 +61,17 @@ class RootnoteViewController: UIViewController {
         }
 
 
-    @IBAction func separateChanged(sender: UISwitch) {
-        separate = sender.on
+    @IBAction func separateChanged(_ sender: UISwitch) {
+        separate = sender.isOn
         }
 
 
-    @IBAction func speakingChanged(sender: UISwitch) {
-        speaking = sender.on
+    @IBAction func speakingChanged(_ sender: UISwitch) {
+        speaking = sender.isOn
         }
 
-    @IBAction func fixedrootChange(sender: UISwitch) {
-        fixedroot = sender.on
+    @IBAction func fixedrootChange(_ sender: UISwitch) {
+        fixedroot = sender.isOn
         }
 
 

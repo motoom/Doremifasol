@@ -12,7 +12,7 @@ import AVFoundation
 
 class PlayViewController: UIViewController {
 
-    var timer: NSTimer?
+    var timer: Timer?
     var paused = false
     var speaker: AVSpeechSynthesizer?
     var dutchVoice: AVSpeechSynthesisVoice? = nil
@@ -23,6 +23,9 @@ class PlayViewController: UIViewController {
     var steps = 0
     var preferflat = true
 
+    // TODO: FLuit blaast 5 seconden door.
+    var solutionDelay = 5.0
+
     @IBOutlet weak var firstNoteLabel: UILabel!
     @IBOutlet weak var secondNoteLabel: UILabel!
     @IBOutlet weak var intervalNameLabel: UILabel!
@@ -30,7 +33,7 @@ class PlayViewController: UIViewController {
 
 
 
-    let intervalNameDutch: [String] = ["prime","kleine secunde","secunde","kleine terts",
+    let intervalNameDutch: [String] = ["priem","kleine secunde","secunde","kleine terts",
 					"grote terts","kwart","verminderde kwint","kwint","overmatige kwint",
 					"sext","klein septiem","groot septiem","octaaf","kleine none", "none",
                     "kleine decime", "grote decime", "undecime"]
@@ -48,7 +51,7 @@ class PlayViewController: UIViewController {
         }
 
 
-    func randbetween(lo: Float, _ hi: Float) -> Float {
+    func randbetween(_ lo: Float, _ hi: Float) -> Float {
         let range = hi - lo
         let v = Float(arc4random_uniform(UInt32.max)) / Float(UInt32.max) // 0...1
         return lo + v * range
@@ -67,7 +70,7 @@ class PlayViewController: UIViewController {
         super.viewDidLoad()
 
         // So that the AppDelegate can pause us when a phone call occurs, or the user switches to another app.
-        let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+        let ad = UIApplication.shared.delegate as! AppDelegate
         ad.playViewController = self
 
         sampler = MidiSampler(patch)
@@ -99,7 +102,7 @@ class PlayViewController: UIViewController {
         firstNoteLabel.text = ""
         secondNoteLabel.text = ""
         intervalNameLabel.text = ""
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "chooseNotes", userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(PlayViewController.chooseNotes), userInfo: nil, repeats: false)
         }
 
 
@@ -112,7 +115,7 @@ class PlayViewController: UIViewController {
         sampler?.allOff()
         sampler = nil
         paused = true
-        pauseButton.setImage(UIImage(named: "button-play"), forState: .Normal)
+        pauseButton.setImage(UIImage(named: "button-play"), for: UIControlState())
         firstNoteLabel.text = ""
         secondNoteLabel.text = ""
         intervalNameLabel.text = "paused"
@@ -129,16 +132,16 @@ class PlayViewController: UIViewController {
         sampler = MidiSampler(patch)
         sampler?.allOff()
         paused = false
-        pauseButton.setImage(UIImage(named: "button-pause"), forState: .Normal)
+        pauseButton.setImage(UIImage(named: "button-pause"), for: UIControlState())
         firstNoteLabel.text = ""
         secondNoteLabel.text = ""
         intervalNameLabel.text = "starting..."
         view.setNeedsDisplay()
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "chooseNotes", userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(PlayViewController.chooseNotes), userInfo: nil, repeats: false)
         }
 
 
-    @IBAction func pauseClicked(sender: UIButton) {
+    @IBAction func pauseClicked(_ sender: UIButton) {
         if paused {
             unpause()
             }
@@ -198,10 +201,10 @@ class PlayViewController: UIViewController {
         preferflat = randyesno()
 
         if separate {
-            timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "playFirstNote", userInfo: nil, repeats: false)
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(PlayViewController.playFirstNote), userInfo: nil, repeats: false)
             }
         else {
-            timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "playBothNotes", userInfo: nil, repeats: false)
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(PlayViewController.playBothNotes), userInfo: nil, repeats: false)
             }
         }
 
@@ -217,7 +220,7 @@ class PlayViewController: UIViewController {
             secondNoteLabel.text = MidiSampler.prtmidinote(firstnote, preferFlat: preferflat, withOctave: false)
             }
 
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "playSecondNote", userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(PlayViewController.playSecondNote), userInfo: nil, repeats: false)
         }
 
 
@@ -231,7 +234,7 @@ class PlayViewController: UIViewController {
         else {
             firstNoteLabel.text = MidiSampler.prtmidinote(secondnote, preferFlat: preferflat, withOctave: false)
             }
-        timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "showSolution", userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: solutionDelay, target: self, selector: #selector(PlayViewController.showSolution), userInfo: nil, repeats: false)
         }
 
 
@@ -247,7 +250,7 @@ class PlayViewController: UIViewController {
             firstNoteLabel.text = MidiSampler.prtmidinote(secondnote, preferFlat: preferflat, withOctave: false)
             secondNoteLabel.text = MidiSampler.prtmidinote(firstnote, preferFlat: preferflat, withOctave: false)
             }
-        timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "showSolution", userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: solutionDelay, target: self, selector: #selector(PlayViewController.showSolution), userInfo: nil, repeats: false)
         }
 
 
@@ -262,22 +265,22 @@ class PlayViewController: UIViewController {
                 utterance.voice = voice
                 utterance.pitchMultiplier = randbetween(0.8, 1.2)
                 utterance.rate = randbetween(0.45, 0.55)
-                speaker?.speakUtterance(utterance)
+                speaker?.speak(utterance)
                 }
             else if let voice = englishVoice {
                 let utterance = AVSpeechUtterance(string: intervalName[steps])
                 utterance.voice = voice
                 utterance.pitchMultiplier = randbetween(0.8, 1.2)
                 utterance.rate = randbetween(0.45, 0.55)
-                speaker?.speakUtterance(utterance)
+                speaker?.speak(utterance)
                 }
             else {
                 // No usable voice.
-                timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "chooseNotes", userInfo: nil, repeats: false)
+                timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(PlayViewController.chooseNotes), userInfo: nil, repeats: false)
                 }
             }
         else {
-            timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "chooseNotes", userInfo: nil, repeats: false)
+            timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(PlayViewController.chooseNotes), userInfo: nil, repeats: false)
             }
         }
     }
@@ -285,9 +288,9 @@ class PlayViewController: UIViewController {
 
 extension PlayViewController: AVSpeechSynthesizerDelegate {
     // Called when the speech synthesizer is done speaking.
-    func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didFinishSpeechUtterance utterance: AVSpeechUtterance) {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         if !paused {
-            timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "chooseNotes", userInfo: nil, repeats: false)
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(PlayViewController.chooseNotes), userInfo: nil, repeats: false)
             }
         }
     }

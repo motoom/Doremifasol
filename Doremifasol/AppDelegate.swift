@@ -20,35 +20,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var playViewController: PlayViewController?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        rootnote = defaults.objectForKey("rootnote") as? Int ?? 60
-        fixedroot = defaults.objectForKey("fixedroot") as? Bool ?? false
-        register = defaults.objectForKey("register") as? Int ?? 1
-        patch = defaults.objectForKey("patch") as? Int ?? 0
-        ascending = defaults.objectForKey("ascending") as? Bool ?? true
-        descending = defaults.objectForKey("descending") as? Bool ?? true
-        separate = defaults.objectForKey("separate") as? Bool ?? true
-        speaking = defaults.objectForKey("speaking") as? Bool ?? true
-        intervals = defaults.objectForKey("intervals") as? [Int] ?? [3, 4, 7, 12]
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        let defaults = UserDefaults.standard
+        rootnote = defaults.object(forKey: "rootnote") as? Int ?? 60
+        fixedroot = defaults.object(forKey: "fixedroot") as? Bool ?? false
+        register = defaults.object(forKey: "register") as? Int ?? 1
+        patch = defaults.object(forKey: "patch") as? Int ?? 0
+        ascending = defaults.object(forKey: "ascending") as? Bool ?? true
+        descending = defaults.object(forKey: "descending") as? Bool ?? true
+        separate = defaults.object(forKey: "separate") as? Bool ?? true
+        speaking = defaults.object(forKey: "speaking") as? Bool ?? true
+        intervals = defaults.object(forKey: "intervals") as? [Int] ?? [3, 4, 7, 12]
         return true
         }
 
     func save() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(rootnote, forKey: "rootnote")
-        defaults.setBool(fixedroot, forKey: "fixedroot")
-        defaults.setInteger(register, forKey: "register")
-        defaults.setInteger(patch, forKey: "patch")
-        defaults.setBool(ascending, forKey: "ascending")
-        defaults.setBool(descending, forKey: "descending")
-        defaults.setBool(separate, forKey: "separate")
-        defaults.setBool(speaking, forKey: "speaking")
-        defaults.setObject(intervals, forKey: "intervals")
+        let defaults = UserDefaults.standard
+        defaults.set(rootnote, forKey: "rootnote")
+        defaults.set(fixedroot, forKey: "fixedroot")
+        defaults.set(register, forKey: "register")
+        defaults.set(patch, forKey: "patch")
+        defaults.set(ascending, forKey: "ascending")
+        defaults.set(descending, forKey: "descending")
+        defaults.set(separate, forKey: "separate")
+        defaults.set(speaking, forKey: "speaking")
+        defaults.set(intervals, forKey: "intervals")
         }
 
 
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         // Called for example, when incoming call occurs, or user doubleclick home button
         save()
         playViewController?.pause()
